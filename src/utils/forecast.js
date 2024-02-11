@@ -10,12 +10,20 @@ const forecast=(latitude,longitude,cb)=>{
             cb('Unable to find locations!',undefined);
         }else{
             // const currentTemp=response.body.current.temperature;
+            // console.log('TESTAPI',response.body.current);
             const feelsLike=response.body.current.feelslike;
             const weatherDesc=response.body.current.weather_descriptions[0];
-            cb(undefined,`It feels like ${feelsLike}, and i can describe it as ${weatherDesc}.`)
+            const windDirection=response.body.current.wind_dir;
+            const weatherIcon=response.body.current.weather_icons;
+            const weatherDetailsObj={
+                "status":`The weather outside is ${weatherDesc} and the it feels like ${feelsLike}. The wind is flowing from ${windDirection}`,
+                "icon":weatherIcon
+            }
+            cb(undefined,weatherDetailsObj)
         }
 
     })
 }
+
 
 module.exports=forecast;

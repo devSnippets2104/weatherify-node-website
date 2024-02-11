@@ -72,9 +72,10 @@ app.get('/weather',(req,res)=>{
             }
 
             res.send({
-                forecast:forecastdata,
+                forecast:forecastdata.status,
                 location:data.placeName,
-                address:address
+                address:address,
+                icon:forecastdata.icon[0]
             });
         })
     });
